@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rcs-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rcs-ui
+  template:
+    metadata:
+      labels:
+        app: rcs-ui
+    spec:
+      containers:
+      - image: obdemo-rcs-ui:1.0
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: platform-config
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        name: rcs-ui
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "10m"
+          limits:
+            memory: "100Mi"
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http

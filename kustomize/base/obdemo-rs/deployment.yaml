@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rs
+  template:
+    metadata:
+      labels:
+        app: rs
+    spec:
+      containers:
+      - image: obdemo-rs:1.0
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: platform-config
+        livenessProbe:
+          httpGet:
+            path: /obRSDiscovery/
+            port: http
+        name: rs
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "10m"
+          limits:
+            memory: "500Mi"
+        ports:
+        - containerPort: 8089
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /obRSDiscovery/
+            port: http

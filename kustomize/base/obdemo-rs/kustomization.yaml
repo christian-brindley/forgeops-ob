@@ -1,0 +1,9 @@
+kind: ""
+apiversion: ""
+commonLabels:
+  app: rs
+  vendor: forgerock
+  tier: ui
+resources:
+- deployment.yaml
+- service.yaml

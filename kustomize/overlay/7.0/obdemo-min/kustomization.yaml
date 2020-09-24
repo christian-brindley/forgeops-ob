@@ -1,0 +1,18 @@
+namespace: obdemo
+commonLabels:
+  app.kubernetes.io/name: "forgerock"
+resources:
+- ../../../base/kustomizeConfig
+- ../../../base/obdemo-rcs-ui
+- ../../../base/obdemo-rcs-api
+- ../../../base/obdemo-rs
+
+patchesStrategicMerge:
+- |-
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: platform-config
+  data:
+    FQDN: obdemo.idhub.cc
+
