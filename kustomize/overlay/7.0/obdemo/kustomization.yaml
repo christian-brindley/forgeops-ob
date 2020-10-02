@@ -122,4 +122,28 @@ patchesStrategicMerge:
             serviceName: ig
             servicePort: 8080
           path: /am
+        - backend:
+            serviceName: ig
+            servicePort: 8080
+          path: /openidm-authz
+        - backend:
+            serviceName: idm
+            servicePort: 80
+          path: /openidm
+        - backend:
+            serviceName: idm
+            servicePort: 80
+          path: /upload
+        - backend:
+            serviceName: idm
+            servicePort: 80
+          path: /export
+        - backend:
+            serviceName: idm
+            servicePort: 80
+          path: /admin
+        - backend:
+            serviceName: idm
+            servicePort: 80
+          path: /openicf
 
